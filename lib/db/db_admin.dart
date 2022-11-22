@@ -9,13 +9,13 @@ class DBAdmin {
   static final DBAdmin db = DBAdmin._();
   DBAdmin._();
 
-  getCheckDatabase() {
+  Future<Database?> getCheckDatabase() async{
     if (myDatabase != null) return myDatabase; //si existe myDatabase la retornamos, sino la inicion con initDB
-    myDatabase = initDB(); //Creación de la base de datos
+    myDatabase = await initDB(); //Creación de la base de datos
     return myDatabase;
   }
 
-  initDB() async {
+  Future<Database> initDB() async{
     //este metodo nos ayuda a crear y gestionar nuestra BD
     //initDB o createDB, ambos funcionan
     Directory directory = await getApplicationDocumentsDirectory();
@@ -30,4 +30,14 @@ class DBAdmin {
       },
     );
   }
+
+  //READ - REALIZAR CONSULTAS A LA TABLA
+
+  getBooks() async{
+    final Database? db = await getCheckDatabase();
+    List res = await db!.rawQuery("SELECT * FROM BOOK");
+    print(res);
+  }
+
+
 }
