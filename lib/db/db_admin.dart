@@ -32,12 +32,30 @@ class DBAdmin {
   }
 
   //READ - REALIZAR CONSULTAS A LA TABLA
-
-  getBooks() async{
+  //------------------------------------
+  //1RA FORMA PARA LLAMAR O TRAER INFORMACION SQL DE LA TABLA
+  getBooksRaw() async{
     final Database? db = await getCheckDatabase();
-    List res = await db!.rawQuery("SELECT * FROM BOOK");
+    List res = await db!.rawQuery("SELECT * FROM BOOK"); //raw -> CRUDO
     print(res);
   }
 
+  // hacer sentencias de SQL en el frontend es una mala practica porque estamos
+  // exponiendo la tabla directamente, el frontend no deberia tener acceso directo
+  // GETBOOKSRAW es para obtener el listado de objetos
+
+  //2DA FORMA PARA TRAER INFORMACION DE LA TABLA
+  getBooks() async{
+    final Database? db = await getCheckDatabase();
+    List res = await db!.query("BOOK");
+    //query("Nombre de la tabla")
+    print(res);
+  }
+
+  //CREATE - Insertar data en la tabla
+  insertBook() async{
+    final Database? db = await getCheckDatabase();
+    db!.rawInsert("INSERT INTO BOOK (title, author, description, image) VALUES ('The Hobbit','JRR Tolkien','Lorem ipsum','https://www...')");
+  }
 
 }
