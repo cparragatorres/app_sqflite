@@ -26,7 +26,7 @@ class DBAdmin {
       onOpen: (Database db) {},
       onCreate: (Database db, int version) async {
         await db
-            .execute("CREATE TABLE BOOK(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, autor TEXT, description TEXT, image TEXT)"); //aqui podemos ejecutar comandos SQL
+            .execute("CREATE TABLE BOOK(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, author TEXT, description TEXT, image TEXT)"); //aqui podemos ejecutar comandos SQL
       },
     );
   }
