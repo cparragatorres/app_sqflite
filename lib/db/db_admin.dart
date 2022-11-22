@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -34,10 +35,10 @@ class DBAdmin {
   //READ - REALIZAR CONSULTAS A LA TABLA
   //------------------------------------
   //1RA FORMA PARA LLAMAR O TRAER INFORMACION SQL DE LA TABLA
-  getBooksRaw() async{
+  Future<List> getBooksRaw() async{
     final Database? db = await getCheckDatabase();
     List res = await db!.rawQuery("SELECT * FROM BOOK"); //raw -> CRUDO
-    print(res);
+    return res;
   }
 
   // hacer sentencias de SQL en el frontend es una mala practica porque estamos
@@ -45,17 +46,29 @@ class DBAdmin {
   // GETBOOKSRAW es para obtener el listado de objetos
 
   //2DA FORMA PARA TRAER INFORMACION DE LA TABLA
-  getBooks() async{
+  Future<List> getBooks() async{
     final Database? db = await getCheckDatabase();
     List res = await db!.query("BOOK");
     //query("Nombre de la tabla")
-    print(res);
+    return res;
   }
 
   //CREATE - Insertar data en la tabla
-  insertBook() async{
+  //------------------------------------
+  //1RA FORMA PARA INSERTAR
+  insertBookRaw() async{
     final Database? db = await getCheckDatabase();
     db!.rawInsert("INSERT INTO BOOK (title, author, description, image) VALUES ('The Hobbit','JRR Tolkien','Lorem ipsum','https://www...')");
+  }
+  //2DA FORMA PARA INSERTAR
+  insertBook() async{
+    final Database? db = await getCheckDatabase();
+    db!.insert("BOOK", {
+      "title": "The Silmarillion",
+      "author": "JRR Tolkien",
+      "description": "Lorem ipsum 2",
+      "image": "https://www...",
+    });
   }
 
 }
