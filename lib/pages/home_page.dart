@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                           BoxShadow(
                             color: kSecondaryColor.withOpacity(0.2),
                             blurRadius: 10.0,
-                            offset: const Offset(4,4),
+                            offset: const Offset(4, 4),
                           ),
                         ],
                       ),
@@ -126,6 +126,30 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(14.0),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 30.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Mis Libros",
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      "Ver más",
+                      style: GoogleFonts.poppins(
+                        color: Colors.white38,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.0
+                      ),
+                    ),
+
+                  ],
                 ),
               ],
             ),
